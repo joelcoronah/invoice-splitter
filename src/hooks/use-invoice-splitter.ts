@@ -10,7 +10,7 @@ export const useInvoiceSplitter = () => {
   const [taxRate, setTaxRate] = React.useState<string>("");
   const [tipAmount, setTipAmount] = React.useState<string>("");
   const [tipType, setTipType] = React.useState<"percentage" | "fixed">(
-    "percentage"
+    "percentage",
   );
   const [isTaxPercentage, setIsTaxPercentage] = React.useState<boolean>(true);
 
@@ -36,7 +36,7 @@ export const useInvoiceSplitter = () => {
       products.map((product) => ({
         ...product,
         selectedBy: product.selectedBy.filter((personId) => personId !== id),
-      }))
+      })),
     );
   };
 
@@ -66,7 +66,7 @@ export const useInvoiceSplitter = () => {
   const handleProductSelection = (
     productId: string,
     personId: string,
-    isSelected: boolean
+    isSelected: boolean,
   ) => {
     setProducts(
       products.map((product) => {
@@ -80,7 +80,7 @@ export const useInvoiceSplitter = () => {
         }
 
         return product;
-      })
+      }),
     );
   };
 
@@ -128,7 +128,7 @@ export const useInvoiceSplitter = () => {
   const calculateSubtotal = (): number => {
     return products.reduce(
       (sum, product) => sum + parseFloat(product.price || "0"),
-      0
+      0,
     );
   };
 

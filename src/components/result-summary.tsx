@@ -68,7 +68,7 @@ export const ResultSummary: React.FC<ResultSummaryProps> = ({
             {people.map((person) => {
               const personTotal = getPersonTotal(person.id);
               const personProducts = products.filter((p) =>
-                p.selectedBy.includes(person.id)
+                p.selectedBy.includes(person.id),
               );
 
               return (
@@ -120,7 +120,7 @@ export const ResultSummary: React.FC<ResultSummaryProps> = ({
                                         (tax + tip) *
                                           (getPersonTotal(person.id) /
                                             total))) /
-                                      subtotal
+                                      subtotal,
                                   )}
                                 </span>
                               </div>
@@ -135,7 +135,7 @@ export const ResultSummary: React.FC<ResultSummaryProps> = ({
                                         (tax + tip) *
                                           (getPersonTotal(person.id) /
                                             total))) /
-                                      subtotal
+                                      subtotal,
                                   )}
                                 </span>
                               </div>

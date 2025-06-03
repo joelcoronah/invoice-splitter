@@ -14,7 +14,7 @@ interface ProductListProps {
   onSelectionChange: (
     productId: string,
     personId: string,
-    isSelected: boolean
+    isSelected: boolean,
   ) => void;
 }
 
