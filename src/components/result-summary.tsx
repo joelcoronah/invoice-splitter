@@ -19,7 +19,6 @@ interface ResultSummaryProps {
 export const ResultSummary: React.FC<ResultSummaryProps> = ({
   people,
   products,
-  currency,
   currencySymbol,
   subtotal,
   tax,
