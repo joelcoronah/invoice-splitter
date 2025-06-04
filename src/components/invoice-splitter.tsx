@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import React from "react";
 
 import { currencies } from "../data/currencies";
+import useGetRateData from "../hooks/use-get-rate-data";
 import { useInvoiceSplitter } from "../hooks/use-invoice-splitter";
 
 import { PersonList } from "./person-list";
@@ -47,6 +48,16 @@ export const InvoiceSplitter: React.FC = () => {
     resetAll,
   } = useInvoiceSplitter();
 
+  const { rate, loading, error } = useGetRateData();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="max-w-md mx-auto">
       <Card className="mb-4">
@@ -71,6 +82,10 @@ export const InvoiceSplitter: React.FC = () => {
           </div>
           <p className="text-small text-default-500">
             Split bills easily among friends
+          </p>
+          <p className="text-small text-default-500 ">{rate.datetime.date}</p>
+          <p className="text-small text-default-500 ">
+            $1 USD = {rate.monitors.usd.price} Bs.
           </p>
         </CardHeader>
         <Divider />
