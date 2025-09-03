@@ -11,8 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@heroui/button": "2.2.25",
-    "@heroui/card": "^2.2.24",
+    "@heroui/button": "^2.2.25",
     "@heroui/checkbox": "^2.3.25",
     "@heroui/chip": "^2.2.21",
     "@heroui/code": "2.2.19",
@@ -38,7 +37,7 @@
     "react-dom": "19.1.1",
     "react-router-dom": "7.8.2",
     "tailwind-variants": "3.1.0",
-    "tailwindcss": "3.4.16",
+    "tailwindcss": "^4.1.12",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
