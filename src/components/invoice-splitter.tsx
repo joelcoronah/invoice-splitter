@@ -58,6 +58,11 @@ export const InvoiceSplitter: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  const mappedCurrencies = currencies.map((curr) => ({
+    key: curr.code,
+    label: `${curr.symbol} ${curr.code}`,
+  }));
+
   return (
     <div className="max-w-md mx-auto">
       <Card className="mb-4">
@@ -67,26 +72,35 @@ export const InvoiceSplitter: React.FC = () => {
             <Select
               aria-label="Select currency"
               className="w-24"
+              color="primary"
               selectedKeys={[currency]}
-              size="sm"
+              variant="flat"
               onChange={handleCurrencyChange}
             >
-              {currencies.map((curr) => (
-                <SelectItem
-                  key={curr.code} // value={curr.code}
-                >
-                  {curr.symbol} {curr.code}
-                </SelectItem>
+              {mappedCurrencies.map((curr) => (
+                <SelectItem key={curr.key}>{curr.label}</SelectItem>
               ))}
             </Select>
           </div>
           <p className="text-small text-default-500">
             Split bills easily among friends
           </p>
-          <p className="text-small text-default-500 ">{rate.datetime.date}</p>
           <p className="text-small text-default-500 ">
-            $1 USD = {rate.monitors.usd.price} Bs.
+            {new Intl.DateTimeFormat("es-ES", {
+              dateStyle: "full",
+              timeZone: "America/Caracas",
+            }).format(new Date(rate.fecha))}
           </p>
+          {currency === "USD" && (
+            <p className="text-small text-default-500 ">
+              $1 USD = {rate.dolar} Bs.
+            </p>
+          )}
+          {currency === "EUR" && (
+            <p className="text-small text-default-500 ">
+              $1 EUR = {rate.euro} Bs.
+            </p>
+          )}
         </CardHeader>
         <Divider />
         <CardBody>

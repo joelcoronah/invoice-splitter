@@ -5,8 +5,7 @@ export interface Currency {
 }
 
 export const currencies: Currency[] = [
-  { code: 'USD', name: 'US Dollar', symbol: '$' },
-  { code: 'VES', name: 'Bolivares', symbol: 'Bs' },
-  { code: 'EUR', name: 'Euro', symbol: '€' },
-  { code: 'CNY', name: 'Chinese Yuan', symbol: '¥' },
+  { code: "USD", name: "US Dollar", symbol: "$" },
+  { code: "VES", name: "Bolivares", symbol: "Bs" },
+  { code: "EUR", name: "Euro", symbol: "€" },
 ];

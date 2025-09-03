@@ -1,29 +1,29 @@
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
-import { Person, Product } from '../types/invoice-types';
+import { Person, Product } from "../types/invoice-types";
 
 export const useInvoiceSplitter = () => {
   const [people, setPeople] = React.useState<Person[]>([]);
   const [products, setProducts] = React.useState<Product[]>([]);
-  const [currency, setCurrency] = React.useState<string>('USD');
-  const [taxRate, setTaxRate] = React.useState<string>('');
-  const [tipAmount, setTipAmount] = React.useState<string>('');
-  const [tipType, setTipType] = React.useState<'percentage' | 'fixed'>(
-    'percentage'
+  const [currency, setCurrency] = React.useState<string>("USD");
+  const [taxRate, setTaxRate] = React.useState<string>("");
+  const [tipAmount, setTipAmount] = React.useState<string>("");
+  const [tipType, setTipType] = React.useState<"percentage" | "fixed">(
+    "percentage",
   );
   const [isTaxPercentage, setIsTaxPercentage] = React.useState<boolean>(true);
 
   // Form state
-  const [personName, setPersonName] = React.useState<string>('');
-  const [productName, setProductName] = React.useState<string>('');
-  const [productPrice, setProductPrice] = React.useState<string>('');
+  const [personName, setPersonName] = React.useState<string>("");
+  const [productName, setProductName] = React.useState<string>("");
+  const [productPrice, setProductPrice] = React.useState<string>("");
 
   // Add a person
   const handleAddPerson = () => {
     if (personName.trim()) {
       setPeople([...people, { id: uuidv4(), name: personName.trim() }]);
-      setPersonName('');
+      setPersonName("");
     }
   };
 
@@ -36,7 +36,7 @@ export const useInvoiceSplitter = () => {
       products.map((product) => ({
         ...product,
         selectedBy: product.selectedBy.filter((personId) => personId !== id),
-      }))
+      })),
     );
   };
 
@@ -52,8 +52,8 @@ export const useInvoiceSplitter = () => {
           selectedBy: [],
         },
       ]);
-      setProductName('');
-      setProductPrice('');
+      setProductName("");
+      setProductPrice("");
     }
   };
 
@@ -66,7 +66,7 @@ export const useInvoiceSplitter = () => {
   const handleProductSelection = (
     productId: string,
     personId: string,
-    isSelected: boolean
+    isSelected: boolean,
   ) => {
     setProducts(
       products.map((product) => {
@@ -80,7 +80,7 @@ export const useInvoiceSplitter = () => {
         }
 
         return product;
-      })
+      }),
     );
   };
 
@@ -101,7 +101,7 @@ export const useInvoiceSplitter = () => {
 
   // Handle tip type change
   const handleTipTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTipType(e.target.value as 'percentage' | 'fixed');
+    setTipType(e.target.value as "percentage" | "fixed");
   };
 
   // Handle tax type change
@@ -127,8 +127,8 @@ export const useInvoiceSplitter = () => {
   // Calculate subtotal
   const calculateSubtotal = (): number => {
     return products.reduce(
-      (sum, product) => sum + parseFloat(product.price || '0'),
-      0
+      (sum, product) => sum + parseFloat(product.price || "0"),
+      0,
     );
   };
 
@@ -151,7 +151,7 @@ export const useInvoiceSplitter = () => {
 
     if (!tipAmount) return 0;
 
-    if (tipType === 'percentage') {
+    if (tipType === "percentage") {
       return subtotal * (parseFloat(tipAmount) / 100);
     } else {
       return parseFloat(tipAmount);
@@ -197,13 +197,13 @@ export const useInvoiceSplitter = () => {
   const resetAll = () => {
     setPeople([]);
     setProducts([]);
-    setTaxRate('');
-    setTipAmount('');
-    setTipType('percentage');
+    setTaxRate("");
+    setTipAmount("");
+    setTipType("percentage");
     setIsTaxPercentage(true);
-    setPersonName('');
-    setProductName('');
-    setProductPrice('');
+    setPersonName("");
+    setProductName("");
+    setProductPrice("");
   };
 
   return {
