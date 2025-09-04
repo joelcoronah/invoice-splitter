@@ -109,11 +109,14 @@ export function ProductsSection({
             </div>
 
             <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700">Who's paying?</p>
+              <p className="text-sm font-medium text-gray-700">
+                {"Who's paying?"}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {people.map((person) => (
                   <label
                     key={person.id}
+                    aria-label={`Select ${person.name} as payer`}
                     className="inline-flex items-center cursor-pointer"
                   >
                     <input

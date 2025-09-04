@@ -1,3 +1,5 @@
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
 import { Plus, Users, X } from "lucide-react";
 import React, { useState } from "react";
 
@@ -35,20 +37,22 @@ export function PeopleSection({
 
       <form className="mb-6" onSubmit={handleSubmit}>
         <div className="flex gap-3">
-          <input
-            className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder-gray-400"
+          <Input
+            color="primary"
             placeholder="Name"
             type="text"
             value={newPersonName}
+            variant="bordered"
             onChange={(e) => setNewPersonName(e.target.value)}
           />
-          <button
-            className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg"
+          <Button
+            color="primary"
             disabled={!newPersonName.trim()}
             type="submit"
+            variant="flat"
           >
             <Plus className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </form>
 

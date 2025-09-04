@@ -11,7 +11,7 @@ interface TaxTipSectionProps {
 export function TaxTipSection({
   taxTip,
   onTaxTipChange,
-  currency,
+  // currency,
 }: TaxTipSectionProps) {
   const handleTaxChange = (value: number) => {
     onTaxTipChange({
@@ -53,7 +53,11 @@ export function TaxTipSection({
       <div className="space-y-6">
         {/* Tax */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label
+            aria-label="Tax"
+            className="block text-sm font-medium text-gray-700 mb-3"
+            htmlFor="tax"
+          >
             Tax
           </label>
           <div className="flex gap-3">
@@ -100,7 +104,11 @@ export function TaxTipSection({
 
         {/* Tip */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label
+            aria-label="Tip"
+            className="block text-sm font-medium text-gray-700 mb-3"
+            htmlFor="tip"
+          >
             Tip
           </label>
           <div className="flex gap-3">

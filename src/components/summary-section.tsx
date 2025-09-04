@@ -17,8 +17,8 @@ interface SummarySectionProps {
 export function SummarySection({
   people,
   products,
-  taxTip,
-  currency,
+  // taxTip,
+  // currency,
   subtotal,
   taxAmount,
   tipAmount,

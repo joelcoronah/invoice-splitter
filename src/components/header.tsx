@@ -24,20 +24,6 @@ export function Header({ currency, handleCurrencyChange, rate }: HeaderProps) {
       <div className="space-y-2">
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-3xl font-bold text-gray-900">Invoice Splitter</h1>
-          {/* <div className="relative">
-            <select
-              className="appearance-none bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 pr-8 text-sm font-medium text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all hover:bg-blue-100"
-              value={currency}
-              onChange={(e) => onCurrencyChange(e.target.value)}
-            >
-              {currencies.map((curr) => (
-                <option key={curr} value={curr}>
-                  Bs {curr}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-600 pointer-events-none" />
-          </div> */}
           <Select
             aria-label="Select currency"
             className="w-24"
