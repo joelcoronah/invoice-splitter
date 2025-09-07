@@ -12,6 +12,12 @@ interface SummarySectionProps {
   tipAmount: number;
   total: number;
   onReset: () => void;
+  rate?: {
+    dolar: string;
+    euro: string;
+    fecha: string;
+    timestamp: number;
+  };
 }
 
 export function SummarySection({
@@ -22,8 +28,32 @@ export function SummarySection({
   tipAmount,
   total,
   currency,
+  rate,
   onReset,
 }: SummarySectionProps) {
+  const formatAmount = (amount: number) => {
+    const formatted = `${amount.toFixed(2)} ${currency}`;
+
+    if ((currency === "USD" || currency === "EUR") && rate) {
+      const rateValue =
+        currency === "USD"
+          ? parseFloat(rate.dolar.replace(",", "."))
+          : parseFloat(rate.euro.replace(",", "."));
+      const vesAmount = amount * rateValue;
+
+      return (
+        <span className="flex flex-col items-end">
+          <span>{formatted}</span>
+          <span className="text-[10px] text-gray-400">
+            Bs{vesAmount.toFixed(2)}
+          </span>
+        </span>
+      );
+    }
+
+    return formatted;
+  };
+
   // Calculate individual payments
   const individualPayments = people.map((person) => {
     const personProducts = products.filter((product) =>
@@ -65,28 +95,20 @@ export function SummarySection({
       <div className="space-y-3 mb-6 p-4 bg-gray-50 rounded-xl">
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Subtotal:</span>
-          <span className="font-medium">
-            {`${currency} ${subtotal.toFixed(2)}`}
-          </span>
+          <span className="font-medium">{formatAmount(subtotal)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Tax:</span>
-          <span className="font-medium">
-            {`${currency} ${taxAmount.toFixed(2)}`}
-          </span>
+          <span className="font-medium">{formatAmount(taxAmount)}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Tip:</span>
-          <span className="font-medium">
-            {`${currency} ${tipAmount.toFixed(2)}`}
-          </span>
+          <span className="font-medium">{formatAmount(tipAmount)}</span>
         </div>
         <div className="border-t border-gray-200 pt-3">
           <div className="flex justify-between text-lg font-bold">
             <span>Total:</span>
-            <span className="text-orange-600">
-              {`${currency} ${total.toFixed(2)}`}
-            </span>
+            <span className="text-orange-600">{formatAmount(total)}</span>
           </div>
         </div>
       </div>
@@ -111,7 +133,7 @@ export function SummarySection({
                 </span>
               </div>
               <span className="text-lg font-bold text-blue-600">
-                {payment.total ? payment.total.toFixed(2) : "0.00"} {currency}
+                {payment.total ? formatAmount(payment.total) : formatAmount(0)}
               </span>
             </div>
 
@@ -122,19 +144,22 @@ export function SummarySection({
               </div>
               <div>
                 Subtotal:{" "}
-                {payment.subtotal ? payment.subtotal.toFixed(2) : "0.00"}{" "}
-                {currency}
+                {payment.subtotal
+                  ? formatAmount(payment.subtotal)
+                  : formatAmount(0)}
               </div>
               <div>
                 Tax share:{" "}
-                {payment.taxShare ? payment.taxShare.toFixed(2) : "0.00"}{" "}
-                {currency}
+                {payment.taxShare
+                  ? formatAmount(payment.taxShare)
+                  : formatAmount(0)}
               </div>
               {payment.tipShare > 0 && (
                 <div>
                   Tip share:{" "}
-                  {payment.tipShare ? payment.tipShare.toFixed(2) : "0.00"}{" "}
-                  {currency}
+                  {payment.tipShare
+                    ? formatAmount(payment.tipShare)
+                    : formatAmount(0)}
                 </div>
               )}
             </div>

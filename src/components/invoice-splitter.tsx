@@ -132,6 +132,7 @@ export function InvoiceSplitter() {
               currency={currency}
               people={people}
               products={products}
+              rate={rate}
               subtotal={subtotal}
               taxAmount={taxAmount}
               taxTip={taxTip}

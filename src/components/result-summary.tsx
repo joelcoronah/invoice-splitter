@@ -13,21 +13,48 @@ interface ResultSummaryProps {
   tax: number;
   tip: number;
   total: number;
+  rate?: {
+    dolar: string;
+    euro: string;
+    fecha: string;
+    timestamp: number;
+  };
   getPersonTotal: (personId: string) => number;
 }
 
 export const ResultSummary: React.FC<ResultSummaryProps> = ({
   people,
   products,
+  currency,
   currencySymbol,
   subtotal,
   tax,
   tip,
   total,
+  rate,
   getPersonTotal,
 }) => {
   const formatCurrency = (amount: number) => {
-    return `${currencySymbol}${amount.toFixed(2)}`;
+    const formatted = `${currencySymbol}${amount.toFixed(2)}`;
+
+    if ((currency === "USD" || currency === "EUR") && rate) {
+      const rateValue =
+        currency === "USD"
+          ? parseFloat(rate.dolar.replace(",", "."))
+          : parseFloat(rate.euro.replace(",", "."));
+      const vesAmount = amount * rateValue;
+
+      return (
+        <span className="flex flex-col items-end">
+          {formatted}
+          <span className="text-tiny text-default-400">
+            Bs{vesAmount.toFixed(2)}
+          </span>
+        </span>
+      );
+    }
+
+    return formatted;
   };
 
   return (
