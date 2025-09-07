@@ -1,3 +1,5 @@
+import { Button } from "@heroui/button";
+import { Input } from "@heroui/input";
 import { Plus, ShoppingCart, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 
@@ -55,33 +57,30 @@ export function ProductsSection({
 
       <form className="mb-6" onSubmit={handleSubmit}>
         <div className="flex gap-3">
-          <input
-            className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all placeholder-gray-400"
+          <Input
             placeholder="Item name"
             type="text"
             value={newProductName}
+            variant="bordered"
             onChange={(e) => setNewProductName(e.target.value)}
           />
           <div className="relative">
-            <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
-              Bs
-            </span>
-            <input
-              className="w-24 pl-8 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all placeholder-gray-400"
+            <Input
               placeholder="Price"
               step="0.01"
               type="number"
               value={newProductPrice}
+              variant="bordered"
               onChange={(e) => setNewProductPrice(e.target.value)}
             />
           </div>
-          <button
-            className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl hover:from-emerald-600 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg"
+          <Button
+            className=" bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl hover:from-emerald-600 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center shadow-md hover:shadow-lg"
             disabled={!newProductName.trim() || !newProductPrice}
             type="submit"
           >
             <Plus className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </form>
 
@@ -97,7 +96,7 @@ export function ProductsSection({
                   {product.name}
                 </span>
                 <span className="text-lg font-bold text-emerald-600">
-                  Bs{product.price.toFixed(2)} {currency}
+                  {product.price.toFixed(2)} {currency}
                 </span>
               </div>
               <button

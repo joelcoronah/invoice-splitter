@@ -95,49 +95,51 @@ export function InvoiceSplitter() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
-      <Header
-        currency={currency}
-        handleCurrencyChange={handleCurrencyChange}
-        rate={rate}
-      />
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-8">
+        <Header
+          currency={currency}
+          handleCurrencyChange={handleCurrencyChange}
+          rate={rate}
+        />
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-6">
-          <PeopleSection
-            people={people}
-            onAddPerson={handleAddPerson}
-            onRemovePerson={handleRemovePerson}
-          />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <PeopleSection
+              people={people}
+              onAddPerson={handleAddPerson}
+              onRemovePerson={handleRemovePerson}
+            />
 
-          <ProductsSection
-            currency={currency}
-            people={people}
-            products={products}
-            onAddProduct={handleAddProduct}
-            onRemoveProduct={handleRemoveProduct}
-            onUpdateProductPayers={handleUpdateProductPayers}
-          />
+            <ProductsSection
+              currency={currency}
+              people={people}
+              products={products}
+              onAddProduct={handleAddProduct}
+              onRemoveProduct={handleRemoveProduct}
+              onUpdateProductPayers={handleUpdateProductPayers}
+            />
 
-          <TaxTipSection
-            currency={currency}
-            taxTip={taxTip}
-            onTaxTipChange={setTaxTip}
-          />
-        </div>
+            <TaxTipSection
+              currency={currency}
+              taxTip={taxTip}
+              onTaxTipChange={setTaxTip}
+            />
+          </div>
 
-        <div className="lg:col-span-1">
-          <SummarySection
-            currency={currency}
-            people={people}
-            products={products}
-            subtotal={subtotal}
-            taxAmount={taxAmount}
-            taxTip={taxTip}
-            tipAmount={tipAmount}
-            total={total}
-            onReset={handleResetAll}
-          />
+          <div className="lg:sticky lg:top-6 h-fit order-last">
+            <SummarySection
+              currency={currency}
+              people={people}
+              products={products}
+              subtotal={subtotal}
+              taxAmount={taxAmount}
+              taxTip={taxTip}
+              tipAmount={tipAmount}
+              total={total}
+              onReset={handleResetAll}
+            />
+          </div>
         </div>
       </div>
     </div>

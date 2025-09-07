@@ -17,12 +17,11 @@ interface SummarySectionProps {
 export function SummarySection({
   people,
   products,
-  // taxTip,
-  // currency,
   subtotal,
   taxAmount,
   tipAmount,
   total,
+  currency,
   onReset,
 }: SummarySectionProps) {
   // Calculate individual payments
@@ -66,20 +65,28 @@ export function SummarySection({
       <div className="space-y-3 mb-6 p-4 bg-gray-50 rounded-xl">
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Subtotal:</span>
-          <span className="font-medium">Bs{subtotal.toFixed(2)}</span>
+          <span className="font-medium">
+            {`${currency} ${subtotal.toFixed(2)}`}
+          </span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Tax:</span>
-          <span className="font-medium">Bs{taxAmount.toFixed(2)}</span>
+          <span className="font-medium">
+            {`${currency} ${taxAmount.toFixed(2)}`}
+          </span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Tip:</span>
-          <span className="font-medium">Bs{tipAmount.toFixed(2)}</span>
+          <span className="font-medium">
+            {`${currency} ${tipAmount.toFixed(2)}`}
+          </span>
         </div>
         <div className="border-t border-gray-200 pt-3">
           <div className="flex justify-between text-lg font-bold">
             <span>Total:</span>
-            <span className="text-orange-600">Bs{total.toFixed(2)}</span>
+            <span className="text-orange-600">
+              {`${currency} ${total.toFixed(2)}`}
+            </span>
           </div>
         </div>
       </div>
@@ -104,7 +111,7 @@ export function SummarySection({
                 </span>
               </div>
               <span className="text-lg font-bold text-blue-600">
-                Bs{payment.total.toFixed(2)}
+                {payment.total ? payment.total.toFixed(2) : "0.00"} {currency}
               </span>
             </div>
 
@@ -113,10 +120,22 @@ export function SummarySection({
                 Items:{" "}
                 {payment.items.map((item) => item.name).join(", ") || "None"}
               </div>
-              <div>Subtotal: Bs{payment.subtotal.toFixed(2)}</div>
-              <div>Tax share: Bs{payment.taxShare.toFixed(2)}</div>
+              <div>
+                Subtotal:{" "}
+                {payment.subtotal ? payment.subtotal.toFixed(2) : "0.00"}{" "}
+                {currency}
+              </div>
+              <div>
+                Tax share:{" "}
+                {payment.taxShare ? payment.taxShare.toFixed(2) : "0.00"}{" "}
+                {currency}
+              </div>
               {payment.tipShare > 0 && (
-                <div>Tip share: Bs{payment.tipShare.toFixed(2)}</div>
+                <div>
+                  Tip share:{" "}
+                  {payment.tipShare ? payment.tipShare.toFixed(2) : "0.00"}{" "}
+                  {currency}
+                </div>
               )}
             </div>
           </div>

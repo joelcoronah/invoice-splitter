@@ -11,7 +11,7 @@ interface TaxTipSectionProps {
 export function TaxTipSection({
   taxTip,
   onTaxTipChange,
-  // currency,
+  currency,
 }: TaxTipSectionProps) {
   const handleTaxChange = (value: number) => {
     onTaxTipChange({
@@ -63,7 +63,7 @@ export function TaxTipSection({
           <div className="flex gap-3">
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
-                {taxTip.tax.type === "percentage" ? "%" : "Bs"}
+                {taxTip.tax.type === "percentage" ? "%" : currency}
               </span>
               <input
                 className="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
@@ -114,7 +114,7 @@ export function TaxTipSection({
           <div className="flex gap-3">
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
-                {taxTip.tip.type === "percentage" ? "%" : "Bs"}
+                {taxTip.tip.type === "percentage" ? "%" : currency}
               </span>
               <input
                 className="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
