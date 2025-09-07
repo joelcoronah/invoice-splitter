@@ -81,7 +81,7 @@ export function SummarySection({
   });
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/50 shadow-lg sticky top-6">
+    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/50 shadow-lg sticky top-6 lg:w-[400px] lg:-mr-12">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
           <Receipt className="w-4 h-4 text-white" />
