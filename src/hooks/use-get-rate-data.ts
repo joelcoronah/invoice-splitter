@@ -7,69 +7,46 @@ interface Cotizaciones {
   timestamp: number;
 }
 
+interface ApiResponse {
+  success: boolean;
+  date: string;
+  rates: {
+    EUR: number;
+    USD: number;
+  };
+  source: string;
+  timestamp: string;
+}
+
 const obtenerCotizaciones = async (): Promise<Cotizaciones> => {
   try {
-    const proxyUrl = "https://corsproxy.io/?";
-    const targetUrl = "https://www.bcv.org.ve/";
+    const apiUrl = "https://bcv-api.netlify.app/api/rates";
 
-    const response = await fetch(
-      `${proxyUrl}${encodeURIComponent(targetUrl)}`,
-      {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-          Accept:
-            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        },
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
 
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
+    const data: ApiResponse = await response.json();
 
-    // Función auxiliar para buscar cotizaciones
-    const buscarCotizacion = (moneda: string): string | null => {
-      const selectores = [
-        `#${moneda} strong`,
-        `#${moneda} .centrado`,
-        `.${moneda} strong`,
-        `[id*="${moneda}"] strong`,
-        `.cotizacion.${moneda} strong`,
-        `.${moneda} .cotizacion strong`,
-      ];
+    // Verificar que la respuesta sea exitosa y tenga los rates
+    if (!data.success || !data.rates) {
+      throw new Error("La API no retornó datos válidos");
+    }
 
-      for (const selector of selectores) {
-        const elemento = doc.querySelector(selector);
-
-        if (elemento && elemento.textContent?.trim()) {
-          return elemento.textContent.trim();
-        }
-      }
-
-      // Buscar con regex como fallback
-      const regex = new RegExp(
-        `${moneda.toUpperCase()}\\s*[^\\d]*([\\d,]+)`,
-        "i",
-      );
-      const match = html.match(regex);
-
-      return match ? match[1] : null;
-    };
-
-    // Obtener ambas cotizaciones
-    const dolar = buscarCotizacion("dolar");
-    const euro = buscarCotizacion("euro");
-
+    // Mapear los rates: USD -> dolar, EUR -> euro
+    // Convertir números a strings para mantener el formato
     return {
-      dolar,
-      euro,
-      fecha: new Date().toISOString(),
-      timestamp: Date.now(),
+      dolar: data.rates.USD?.toString() || null,
+      euro: data.rates.EUR?.toString() || null,
+      fecha: data.timestamp || new Date().toISOString(),
+      timestamp: new Date(data.timestamp || Date.now()).getTime(),
     };
   } catch (error) {
     console.error("Error al obtener las cotizaciones:", error);
