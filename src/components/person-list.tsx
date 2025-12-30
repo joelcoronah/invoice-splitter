@@ -3,7 +3,6 @@ import { X } from "lucide-react";
 import React from "react";
 
 import { Person } from "../types/invoice-types";
-import { Chip } from "@/components/ui/chip";
 
 interface PersonListProps {
   people: Person[];
