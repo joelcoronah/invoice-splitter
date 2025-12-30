@@ -1,9 +1,10 @@
-import { Card, CardBody } from "@heroui/card";
-import { Checkbox } from "@heroui/checkbox";
-import { Chip } from "@heroui/chip";
+import { X } from "lucide-react";
 import React from "react";
 
 import { Person, Product } from "../types/invoice-types";
+
+import { Card, CardBody } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ProductListProps {
   products: Product[];
@@ -29,47 +30,48 @@ export const ProductList: React.FC<ProductListProps> = ({
   return (
     <div className="space-y-2">
       {products.map((product) => (
-        <Card
-          key={product.id}
-          className="border border-default-200"
-          shadow="sm"
-        >
+        <Card key={product.id} className="border border-border">
           <CardBody className="p-3">
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
                 <p className="font-medium">{product.name}</p>
-                <p className="text-default-500 text-small">
+                <p className="text-muted-foreground text-sm">
                   {currencySymbol}
                   {parseFloat(product.price).toFixed(2)} {currency}
                 </p>
               </div>
-              <Chip
-                color="danger"
-                size="sm"
-                variant="flat"
-                onClose={() => onRemove(product.id)}
+              <button
+                className="inline-flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium hover:bg-red-200 transition-colors"
+                onClick={() => onRemove(product.id)}
               >
+                <X className="w-3 h-3" />
                 Remove
-              </Chip>
+              </button>
             </div>
 
             {people.length > 0 && (
               <div className="mt-2">
-                <p className="text-small text-default-500 mb-1">
+                <p className="text-sm text-muted-foreground mb-1">
                   Who&apos;s paying?
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {people.map((person) => (
-                    <Checkbox
+                    <label
                       key={`${product.id}-${person.id}`}
-                      isSelected={product.selectedBy.includes(person.id)}
-                      size="sm"
-                      onValueChange={(isSelected) =>
-                        onSelectionChange(product.id, person.id, isSelected)
-                      }
+                      className="flex items-center gap-2 cursor-pointer"
                     >
-                      {person.name}
-                    </Checkbox>
+                      <Checkbox
+                        checked={product.selectedBy.includes(person.id)}
+                        onChange={(e) =>
+                          onSelectionChange(
+                            product.id,
+                            person.id,
+                            e.target.checked,
+                          )
+                        }
+                      />
+                      <span className="text-sm">{person.name}</span>
+                    </label>
                   ))}
                 </div>
               </div>

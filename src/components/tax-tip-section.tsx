@@ -1,6 +1,7 @@
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
 import { Calculator, DollarSign, Percent } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 import { TaxTipData } from "../types";
 
@@ -68,14 +69,13 @@ export function TaxTipSection({
                   input: "ml-6",
                 }}
                 startContent={
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                  <span className="text-gray-500 text-sm">
                     {taxTip.tax.type === "percentage" ? "%" : currency}
                   </span>
                 }
                 step="0.01"
                 type="number"
                 value={taxTip.tax.value.toString()}
-                variant="bordered"
                 onChange={(e) =>
                   handleTaxChange(parseFloat(e.target.value) || 0)
                 }
@@ -90,7 +90,7 @@ export function TaxTipSection({
                 }`}
                 type="button"
                 variant="flat"
-                onPress={() => handleTaxTypeChange("percentage")}
+                onClick={() => handleTaxTypeChange("percentage")}
               >
                 <Percent className="w-4 h-4" />
               </Button>
@@ -102,7 +102,7 @@ export function TaxTipSection({
                 }`}
                 type="button"
                 variant="flat"
-                onPress={() => handleTaxTypeChange("fixed")}
+                onClick={() => handleTaxTypeChange("fixed")}
               >
                 <DollarSign className="w-4 h-4" />
               </Button>
@@ -125,14 +125,13 @@ export function TaxTipSection({
                   input: "ml-6",
                 }}
                 startContent={
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                  <span className="text-gray-500 text-sm">
                     {taxTip.tip.type === "percentage" ? "%" : currency}
                   </span>
                 }
                 step="0.01"
                 type="number"
                 value={taxTip.tip.value.toString()}
-                variant="bordered"
                 onChange={(e) =>
                   handleTipChange(parseFloat(e.target.value) || 0)
                 }
@@ -146,7 +145,7 @@ export function TaxTipSection({
                     : "text-gray-600 hover:text-purple-600"
                 }`}
                 type="button"
-                onPress={() => handleTipTypeChange("percentage")}
+                onClick={() => handleTipTypeChange("percentage")}
               >
                 <Percent className="w-4 h-4" />
               </Button>
@@ -157,7 +156,7 @@ export function TaxTipSection({
                     : "text-gray-600 hover:text-purple-600"
                 }`}
                 type="button"
-                onPress={() => handleTipTypeChange("fixed")}
+                onClick={() => handleTipTypeChange("fixed")}
               >
                 <DollarSign className="w-4 h-4" />
               </Button>

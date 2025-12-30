@@ -1,9 +1,9 @@
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
 import { Plus, ShoppingCart, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 
 import { Person, Product } from "../types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface ProductsSectionProps {
   products: Product[];
@@ -61,7 +61,6 @@ export function ProductsSection({
             placeholder="Item name"
             type="text"
             value={newProductName}
-            variant="bordered"
             onChange={(e) => setNewProductName(e.target.value)}
           />
           <div className="relative">
@@ -70,7 +69,6 @@ export function ProductsSection({
               step="0.01"
               type="number"
               value={newProductPrice}
-              variant="bordered"
               onChange={(e) => setNewProductPrice(e.target.value)}
             />
           </div>

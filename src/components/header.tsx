@@ -1,7 +1,7 @@
-import { Select, SelectItem } from "@heroui/select";
 import { Receipt } from "lucide-react";
 
 import { currencies } from "../data/currencies";
+import { Select, SelectItem } from "@/components/ui/select";
 
 interface HeaderProps {
   currency: string;
@@ -27,13 +27,13 @@ export function Header({ currency, handleCurrencyChange, rate }: HeaderProps) {
           <Select
             aria-label="Select currency"
             className="w-24"
-            color="primary"
             selectedKeys={[currency]}
-            variant="flat"
             onChange={handleCurrencyChange}
           >
             {mappedCurrencies.map((curr) => (
-              <SelectItem key={curr.key}>{curr.label}</SelectItem>
+              <SelectItem key={curr.key} value={curr.key}>
+                {curr.label}
+              </SelectItem>
             ))}
           </Select>
         </div>

@@ -1,9 +1,9 @@
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
 import { Plus, Users, X } from "lucide-react";
 import React, { useState } from "react";
 
 import { Person } from "../types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface PeopleSectionProps {
   people: Person[];
@@ -38,18 +38,15 @@ export function PeopleSection({
       <form className="mb-6" onSubmit={handleSubmit}>
         <div className="flex gap-3">
           <Input
-            color="primary"
             placeholder="Name"
             type="text"
             value={newPersonName}
-            variant="bordered"
             onChange={(e) => setNewPersonName(e.target.value)}
           />
           <Button
-            color="primary"
             disabled={!newPersonName.trim()}
             type="submit"
-            variant="flat"
+            variant="default"
           >
             <Plus className="w-5 h-5" />
           </Button>

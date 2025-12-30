@@ -1,5 +1,3 @@
-import { Link } from "@heroui/link";
-
 export default function DefaultLayout({
   children,
 }: {
@@ -11,15 +9,16 @@ export default function DefaultLayout({
         {children}
       </main>
       <footer className="w-full flex items-center justify-center py-3">
-        <Link
-          isExternal
-          className="flex items-center gap-1 text-current"
+        <a
+          className="flex items-center gap-1 text-current hover:underline"
           href="https://joelcornah.com"
+          target="_blank"
+          rel="noopener noreferrer"
           title="Joel's homepage"
         >
-          <span className="text-default-600">Powered by</span>
+          <span className="text-muted-foreground">Powered by</span>
           <p className="text-primary">Joel Corona</p>
-        </Link>
+        </a>
       </footer>
     </div>
   );
