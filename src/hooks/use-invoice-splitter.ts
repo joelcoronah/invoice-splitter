@@ -85,8 +85,8 @@ export const useInvoiceSplitter = () => {
   };
 
   // Handle currency change
-  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrency(e.target.value);
+  const handleCurrencyChange = (value: string) => {
+    setCurrency(value);
   };
 
   // Handle tax rate change

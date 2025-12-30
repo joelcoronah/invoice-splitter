@@ -9,6 +9,7 @@ import { PeopleSection } from "./people-section";
 import { ProductsSection } from "./product-section";
 import { SummarySection } from "./summary-section";
 import { TaxTipSection } from "./tax-tip-section";
+import { Loading } from "./ui/loading";
 
 export function InvoiceSplitter() {
   const { currency, handleCurrencyChange } = useInvoiceSplitter();
@@ -87,7 +88,7 @@ export function InvoiceSplitter() {
   const { rate, loading, error } = useGetRateData();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

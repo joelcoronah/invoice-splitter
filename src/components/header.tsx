@@ -1,11 +1,18 @@
 import { Receipt } from "lucide-react";
 
 import { currencies } from "../data/currencies";
-import { Select, SelectItem } from "@/components/ui/select";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface HeaderProps {
   currency: string;
-  handleCurrencyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleCurrencyChange: (value: string) => void;
   rate: any;
 }
 
@@ -24,17 +31,17 @@ export function Header({ currency, handleCurrencyChange, rate }: HeaderProps) {
       <div className="space-y-2">
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-3xl font-bold text-gray-900">Invoice Splitter</h1>
-          <Select
-            aria-label="Select currency"
-            className="w-24"
-            selectedKeys={[currency]}
-            onChange={handleCurrencyChange}
-          >
-            {mappedCurrencies.map((curr) => (
-              <SelectItem key={curr.key} value={curr.key}>
-                {curr.label}
-              </SelectItem>
-            ))}
+          <Select value={currency} onValueChange={handleCurrencyChange}>
+            <SelectTrigger className="w-24">
+              <SelectValue placeholder="Select currency" />
+            </SelectTrigger>
+            <SelectContent>
+              {mappedCurrencies.map((curr) => (
+                <SelectItem key={curr.key} value={curr.key}>
+                  {curr.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
         </div>
         <p className="text-gray-600">Split bills easily among friends</p>

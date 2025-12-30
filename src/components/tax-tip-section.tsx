@@ -1,9 +1,9 @@
 import { Calculator, DollarSign, Percent } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
 import { TaxTipData } from "../types";
+
+import { ButtonGroup } from "@/components/ui/button-group";
+import { Input } from "@/components/ui/input";
 
 interface TaxTipSectionProps {
   taxTip: TaxTipData;
@@ -62,12 +62,9 @@ export function TaxTipSection({
           >
             Tax
           </label>
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <div className="relative flex-1">
               <Input
-                classNames={{
-                  input: "ml-6",
-                }}
                 startContent={
                   <span className="text-gray-500 text-sm">
                     {taxTip.tax.type === "percentage" ? "%" : currency}
@@ -81,32 +78,22 @@ export function TaxTipSection({
                 }
               />
             </div>
-            <div className="flex bg-gray-100 rounded-xl p-1">
-              <Button
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                  taxTip.tax.type === "percentage"
-                    ? "bg-white text-purple-600 shadow-sm"
-                    : "text-gray-600 hover:text-purple-600"
-                }`}
-                type="button"
-                variant="flat"
-                onClick={() => handleTaxTypeChange("percentage")}
-              >
-                <Percent className="w-4 h-4" />
-              </Button>
-              <Button
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                  taxTip.tax.type === "fixed"
-                    ? "bg-white text-purple-600 shadow-sm"
-                    : "text-gray-600 hover:text-purple-600"
-                }`}
-                type="button"
-                variant="flat"
-                onClick={() => handleTaxTypeChange("fixed")}
-              >
-                <DollarSign className="w-4 h-4" />
-              </Button>
-            </div>
+            <ButtonGroup
+              options={[
+                {
+                  value: "percentage",
+                  icon: <Percent className="w-4 h-4" />,
+                },
+                {
+                  value: "fixed",
+                  icon: <DollarSign className="w-4 h-4" />,
+                },
+              ]}
+              value={taxTip.tax.type}
+              onValueChange={(value) =>
+                handleTaxTypeChange(value as "percentage" | "fixed")
+              }
+            />
           </div>
         </div>
 
@@ -118,12 +105,9 @@ export function TaxTipSection({
           >
             Tip
           </label>
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <div className="relative flex-1">
               <Input
-                classNames={{
-                  input: "ml-6",
-                }}
                 startContent={
                   <span className="text-gray-500 text-sm">
                     {taxTip.tip.type === "percentage" ? "%" : currency}
@@ -137,30 +121,22 @@ export function TaxTipSection({
                 }
               />
             </div>
-            <div className="flex bg-gray-100 rounded-xl p-1">
-              <Button
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                  taxTip.tip.type === "percentage"
-                    ? "bg-white text-purple-600 shadow-sm"
-                    : "text-gray-600 hover:text-purple-600"
-                }`}
-                type="button"
-                onClick={() => handleTipTypeChange("percentage")}
-              >
-                <Percent className="w-4 h-4" />
-              </Button>
-              <Button
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                  taxTip.tip.type === "fixed"
-                    ? "bg-white text-purple-600 shadow-sm"
-                    : "text-gray-600 hover:text-purple-600"
-                }`}
-                type="button"
-                onClick={() => handleTipTypeChange("fixed")}
-              >
-                <DollarSign className="w-4 h-4" />
-              </Button>
-            </div>
+            <ButtonGroup
+              options={[
+                {
+                  value: "percentage",
+                  icon: <Percent className="w-4 h-4" />,
+                },
+                {
+                  value: "fixed",
+                  icon: <DollarSign className="w-4 h-4" />,
+                },
+              ]}
+              value={taxTip.tip.type}
+              onValueChange={(value) =>
+                handleTipTypeChange(value as "percentage" | "fixed")
+              }
+            />
           </div>
         </div>
       </div>
