@@ -1,12 +1,14 @@
-import { Receipt } from "lucide-react";
-
 export function Loading() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="text-center space-y-4">
         <div className="relative inline-flex items-center justify-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-lg animate-pulse">
-            <Receipt className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg animate-pulse">
+            <img
+              alt="Logo"
+              className="w-16 h-16 object-contain"
+              src="/logo.png"
+            />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-20 h-20 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
